@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-2"
+  # Dont forget to set `AWS_DEFAULT_REGION` in your stack.
 }
 
 provider "spacelift" {}
@@ -55,6 +55,11 @@ module "stack_opentofu" {
       value     = var.vpc_security_group_id
       sensitive = false
     }
+
+    AWS_DEFAULT_REGION = {
+      value     = var.aws_default_region
+      sensitive = false
+    }
   }
 
   contexts = {
@@ -75,11 +80,6 @@ module "stack_ansible" {
   space_id        = var.resource_space_id
 
   auto_deploy = true
-
-  aws_integration = {
-    enabled = true
-    id      = var.aws_integration_id
-  }
 
   environment_variables = {
     # !IMPORTANT

@@ -27,3 +27,9 @@ variable "vpc_security_group_id" {
   description = "The security group attached to instance in the OpenTofu stack."
   default     = "sg-01cb7dc1977bf9603"
 }
+
+variable "aws_default_region" {
+  type        = string
+  description = "The default region to use for the AWS provider."
+  default     = "us-east-1"
+}
