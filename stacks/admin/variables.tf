@@ -1,6 +1,6 @@
 variable "aws_integration_id" {
   type        = string
-  description = "The AWS Ingegration to use for child stacks."
+  description = "The AWS Integration to use for child stacks."
   default     = "01JAZPBRW3K2YB0K7F58NZSDY6"
 }
 
