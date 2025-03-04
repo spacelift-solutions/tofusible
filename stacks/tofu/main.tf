@@ -26,9 +26,7 @@ variable "vpc_security_group_id" {
   description = "The security groups to use for the instances"
 }
 
-provider "aws" {
-  region = "us-east-2"
-}
+provider "aws" {}
 
 data "aws_ami" "this" {
   most_recent = true
