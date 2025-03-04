@@ -7,7 +7,7 @@ variable "aws_integration_id" {
 variable "resource_space_id" {
   type        = string
   description = "The Space ID to use for created resources."
-  default     = "root"
+  default     = "opentofu-01JB2XV5E3ZR3NDTKCN80KS6RH"
 }
 
 variable "ansible_worker_pool_id" {
