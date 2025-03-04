@@ -1,0 +1,7 @@
+---
+# This is the dynamic inventory plugin name, it should be spacelift always.
+plugin: spacelift
+
+# This is the name of the input in the admin stack that is passed from the OpenTofu stack.
+environment_variables:
+  - TOFUSIBLE_INVENTORY

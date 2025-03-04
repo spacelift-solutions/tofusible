@@ -1,0 +1,15 @@
+---
+- name: Install and Configure Nginx
+
+  # In the OpenTofu stack, you can see that all the `tofusible_hosts` are defined in the `tofu` group.
+  # So this playbook will run on all the hosts in the `tofu` group.
+  hosts: tofu
+  become: yes
+  tasks:
+    - name: Create File On Server
+      ansible.builtin.copy:
+        dest: /file.txt
+        content: |
+          Hello From Spacelift!
+          If this file is present, the playbook ran successfully!
+        mode: '0644'
