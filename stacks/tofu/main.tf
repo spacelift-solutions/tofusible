@@ -78,7 +78,8 @@ resource "aws_instance" "tofu_dev" {
 ## Add Tofu production To The Inventory !IMPORTANT
 ##############################################################
 module "host_tofu_production" {
-  source = "../../modules/tofusible_host"
+  source  = "spacelift.io/spacelift-solutions/tofusible-host/spacelift"
+  version = "1.0.0"
 
   host                 = aws_instance.tofu_production.public_ip
   user                 = "ubuntu"
@@ -90,7 +91,8 @@ module "host_tofu_production" {
 ## Add Tofu qa To The Inventory !IMPORTANT
 ##############################################################
 module "host_tofu_qa" {
-  source = "../../modules/tofusible_host"
+  source  = "spacelift.io/spacelift-solutions/tofusible-host/spacelift"
+  version = "1.0.0"
 
   host                 = aws_instance.tofu_qa.public_ip
   user                 = "ubuntu"
@@ -102,7 +104,8 @@ module "host_tofu_qa" {
 ## Add Tofu dev To The Inventory !IMPORTANT
 ##############################################################
 module "host_tofu_dev" {
-  source = "../../modules/tofusible_host"
+  source  = "spacelift.io/spacelift-solutions/tofusible-host/spacelift"
+  version = "1.0.0"
 
   host                 = aws_instance.tofu_dev.public_ip
   user                 = "ubuntu"
