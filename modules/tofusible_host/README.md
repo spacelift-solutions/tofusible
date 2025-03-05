@@ -18,7 +18,7 @@ Groups tells the dynamic inventory plugin what group to add the host to. It also
 Say you create a host with the following information:
 ```hcl
 module "tofusible_host_1" {
-  source = "./"
+  source  = "spacelift.io/spacelift-solutions/tofusible-host/spacelift"
 
   host   = aws_ec2_instance.example.public_ip
   groups = ["web", "production", "servers.linux"]
@@ -37,7 +37,7 @@ Extra vars are extra host variables you can use in your ansible playbook. These 
 Say you create a host with the following information:
 ```hcl
 module "tofusible_host_1" {
-  source = "./"
+  source  = "spacelift.io/spacelift-solutions/tofusible-host/spacelift"
 
   host       = aws_ec2_instance.example.public_ip
   extra_vars = {
@@ -56,7 +56,7 @@ They can be passed into the module as their name minus the `ansible_` prefix.
 For example, if you wanted to set the `ansible_host` variable for a host, you would pass it in like so:
 ```hcl
 module "tofusible_host_1" {
-  source = "./"
+  source  = "spacelift.io/spacelift-solutions/tofusible-host/spacelift"
 
   host = "192.168.1.1"
   user = "ubuntu"
