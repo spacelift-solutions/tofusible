@@ -128,7 +128,7 @@ module "stack_ansible" {
           trigger_always = true
           # This is the name of the output in the OpenTofu stack that holds the host information
           output_name = "inventory_tofu"
-          # This input name is reference in the `spacelift.yml` file
+          # This input name is reference in the `tofusible.yml` file
           # It tells the dynamic inventory where to get information about the hosts
           # Created in OpenTofu
           input_name = "TOFUSIBLE_INVENTORY"
