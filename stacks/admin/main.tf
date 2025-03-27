@@ -85,7 +85,7 @@ module "stack_ansible" {
     # !IMPORTANT
     # This variable tells ansible where to find the inventory file
     ANSIBLE_INVENTORY = {
-      value     = "spacelift.yml"
+      value     = "tofusible.yml"
       sensitive = false
     }
   }

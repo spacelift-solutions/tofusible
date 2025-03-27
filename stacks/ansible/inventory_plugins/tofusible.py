@@ -4,7 +4,7 @@
 # Local Testing
 #
 # export TOFUSIBLE_INVENTORY='[{"groups":["web","ohio.columbus"],"host":"JOEY_TEST","password":"this_is_a_test","port":22,"ssh_key":null,"user":"tofu"}]'
-# ansible-inventory -i spacelift.yml --playbook-dir ./ --list
+# ansible-inventory -i tofusible.yml --playbook-dir ./ --list
 
 import os
 import json
@@ -15,7 +15,7 @@ from ansible.errors import AnsibleParserError, AnsibleError
 # Format Documentation: https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_documenting.html
 
 DOCUMENTATION = r'''
-    name: spacelift
+    name: tofusible
     plugin_type: inventory
     short_description: Reads Ansible Generated Inventory From OpenTofu
     description: Reads Ansible Generated Inventory From OpenTofu
@@ -23,7 +23,7 @@ DOCUMENTATION = r'''
       plugin:
           description: Name of the plugin
           required: true
-          choices: ['spacelift']
+          choices: ['tofusible']
       environment_variables:
           description: Environment Variables to parse for 
           required: true
@@ -47,7 +47,7 @@ def read_variables(variables):
 
 
 class InventoryModule(BaseInventoryPlugin):
-    NAME = "spacelift"
+    NAME = "tofusible"
 
     def __init__(self):
         super().__init__()
@@ -55,7 +55,7 @@ class InventoryModule(BaseInventoryPlugin):
     def verify_file(self, path):
         valid = False
         if super(InventoryModule, self).verify_file(path):
-            if path.endswith(('spacelift.yml', 'spacelift.yaml')):
+            if path.endswith(('tofusible.yml', 'tofusible.yaml')):
                 valid = True
         return valid
 
