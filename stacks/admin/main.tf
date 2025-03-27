@@ -105,9 +105,9 @@ module "stack_ansible" {
   hooks = {
     before = {
       # !IMPORTANT
-      # WE *must* chmod the spacelift.yml and private key files for ansible to use them.
-      init  = ["chmod 644 spacelift.yml", "chmod 600 ${local.private_key_full_path}"]
-      apply = ["chmod 644 spacelift.yml", "chmod 600 ${local.private_key_full_path}"]
+      # WE *must* chmod the tofusible.yml and private key files for ansible to use them.
+      init  = ["chmod 644 tofusible.yml", "chmod 600 ${local.private_key_full_path}"]
+      apply = ["chmod 644 tofusible.yml", "chmod 600 ${local.private_key_full_path}"]
     }
   }
 

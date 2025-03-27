@@ -19,7 +19,7 @@ From a high level, the process is as follows:
 2. You use the `tofusible_host` module to gather information about the virtual machines you created.
 3. You output the `tofusible_host`s as a list of hosts in OpenTofu (using native OpenTofu outputs).
 4. You use the [Spacelift stack dependency](https://docs.spacelift.io/concepts/stack/stack-dependencies#stack-dependencies) feature to pass the output to an Ansible stack.
-5. The ansible stack uses the `spacelift` dynamic inventory plugin to read that output and generate a dynamic inventory based off it.
+5. The ansible stack uses the `tofusible` dynamic inventory plugin to read that output and generate a dynamic inventory based off it.
 6. Ansible then uses that dynamic inventory to configure the virtual machines you created.
 
 ### Directory Structure
@@ -30,5 +30,5 @@ This example/source repo has many directories in it, browse around to each direc
 - `stacks/admin` - The Spacelift admin stack that sets up the OpenTofu and Ansible stacks as well as creates the stack dependency between them.
 - `stacks/tofu` - The OpenTofu stack that creates the virtual machines.
 - `stacks/ansible` - The Ansible stack that configures the virtual machines.
-  - This directory also has an `inventory_plugins` directory that contains the `spacelift.py` dynamic inventory plugin.
+  - This directory also has an `inventory_plugins` directory that contains the `tofusible.py` dynamic inventory plugin.
 
