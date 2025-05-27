@@ -25,6 +25,8 @@ module "stack_opentofu" {
 
   auto_deploy = true
 
+  labels = ["infracost"]
+
   aws_integration = {
     enabled = true
     id      = var.aws_integration_id
