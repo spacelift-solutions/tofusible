@@ -48,7 +48,9 @@ resource "aws_instance" "tofu_production" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.vpc_security_group_id]
   tags = {
-    Name = "tofu production"
+    Name        = "tofu production"
+    Environment = "production"
+    Project     = "tofusible-demo"
   }
 }
 
@@ -59,7 +61,9 @@ resource "aws_instance" "tofu_qa" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.vpc_security_group_id]
   tags = {
-    Name = "tofu qa"
+    Name        = "tofu qa"
+    Environment = "qa"
+    Project     = "tofusible-demo"
   }
 }
 
@@ -70,7 +74,9 @@ resource "aws_instance" "tofu_dev" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.vpc_security_group_id]
   tags = {
-    Name = "tofu dev"
+    Name        = "tofu dev"
+    Environment = "development"
+    Project     = "tofusible-demo"
   }
 }
 
