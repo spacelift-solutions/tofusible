@@ -25,8 +25,6 @@ module "stack_opentofu" {
 
   auto_deploy = true
 
-  labels = ["infracost"]
-
   aws_integration = {
     enabled = true
     id      = var.aws_integration_id
@@ -68,7 +66,7 @@ module "stack_opentofu" {
     tofusible_ssh_key = spacelift_context.ssh_keys.id
   }
 
-  labels            = ["tofusible", "opentofu"]
+  labels            = ["tofusible", "opentofu", "infracost"]
   project_root      = "stacks/tofu"
   repository_branch = "main"
 }
