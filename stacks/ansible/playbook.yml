@@ -8,7 +8,7 @@
   tasks:
     - name: Create File On Server
       ansible.builtin.copy:
-        dest: /tmp/file.txt
+        dest: /file.txt
         content: |
           Hello From Spacelift!
           If this file is present, the playbook ran successfully!

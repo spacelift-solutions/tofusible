@@ -106,8 +106,8 @@ module "stack_ansible" {
     before = {
       # !IMPORTANT
       # WE *must* chmod the tofusible.yml and private key files for ansible to use them.
-      init  = ["chmod 644 tofusible.yml", "chmod 600 ${local.private_key_full_path}"]
-      apply = ["chmod 644 tofusible.yml", "chmod 600 ${local.private_key_full_path}"]
+      init  = ["chmod 644 tofusible.yml", "chmod 600 ${local.private_key_full_path}", "chmod 777 /tmp"]
+      apply = ["chmod 644 tofusible.yml", "chmod 600 ${local.private_key_full_path}", "chmod 777 /tmp"]
     }
   }
 
