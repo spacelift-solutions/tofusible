@@ -33,3 +33,9 @@ variable "aws_default_region" {
   description = "The default region to use for the AWS provider."
   default     = "us-east-1"
 }
+
+variable "create_additional_dependency_for_demos" {
+  type        = bool
+  description = "Whether to create an additional dependency resource for demo purposes."
+  default     = false
+}

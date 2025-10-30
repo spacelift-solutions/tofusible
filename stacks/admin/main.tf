@@ -15,6 +15,52 @@ provider "aws" {
 
 provider "spacelift" {}
 
+locals {
+  required_dependencies = {
+    TOFUSIBLE = {
+      child_stack_id = module.stack_ansible.id
+      references = {
+        # NOTE: This output is *sensitive* as it could hold passwords
+        # If you want to use this on a private worker you *MUST* enable sensitive output uploading.
+        # This example utilizes a public worker to create the output (see the stack_tofu above)
+        # and public workers do not require that setting.
+        # See more: https://docs.spacelift.io/concepts/stack/stack-dependencies#enabling-sensitive-outputs-for-references
+        INVENTORY = {
+          trigger_always = true
+          # This is the name of the output in the OpenTofu stack that holds the host information
+          output_name = "inventory_tofu"
+          # This input name is reference in the `tofusible.yml` file
+          # It tells the dynamic inventory where to get information about the hosts
+          # Created in OpenTofu
+          input_name = "TOFUSIBLE_INVENTORY"
+        }
+      }
+    }
+  }
+
+  optional_dependencies = var.create_additional_dependency_for_demos ? {
+    TOFUSIBLE_ADDITONAL = {
+      child_stack_id = module.stack_additional[0].id
+      references = {
+        INVENTORY = {
+          trigger_always = true
+          output_name    = "inventory_tofu"
+          input_name     = "TF_VAR_tofusible_inventory"
+        }
+      }
+    }
+  } : {}
+
+  none_empty_optional_dependencies = {
+    for k, v in local.optional_dependencies : k => v if length(v) > 0
+  }
+
+  dependencies = merge(
+    local.required_dependencies,
+    local.none_empty_optional_dependencies
+  )
+}
+
 module "stack_opentofu" {
   source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
 
@@ -61,6 +107,8 @@ module "stack_opentofu" {
       sensitive = false
     }
   }
+
+  dependencies = local.dependencies
 
   contexts = {
     tofusible_ssh_key = spacelift_context.ssh_keys.id
@@ -112,28 +160,21 @@ module "stack_ansible" {
   }
 
   worker_pool_id = var.ansible_worker_pool_id
+}
 
-  dependencies = {
-    # Pass the inventory from the OpenTofu stack to the Ansible stack
-    TOFUSIBLE = {
-      parent_stack_id = module.stack_opentofu.id
+module "stack_additional" {
+  source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
 
-      references = {
-        # NOTE: This output is *sensitive* as it could hold passwords
-        # If you want to use this on a private worker you *MUST* enable sensitive output uploading.
-        # This example utilizes a public worker to create the output (see the stack_tofu above)
-        # and public workers do not require that setting.
-        # See more: https://docs.spacelift.io/concepts/stack/stack-dependencies#enabling-sensitive-outputs-for-references
-        INVENTORY = {
-          trigger_always = true
-          # This is the name of the output in the OpenTofu stack that holds the host information
-          output_name = "inventory_tofu"
-          # This input name is reference in the `tofusible.yml` file
-          # It tells the dynamic inventory where to get information about the hosts
-          # Created in OpenTofu
-          input_name = "TOFUSIBLE_INVENTORY"
-        }
-      }
-    }
-  }
+  count = var.create_additional_dependency_for_demos ? 1 : 0
+
+  description     = "Stack that creates null resources"
+  name            = "Tofusible - Additional"
+  repository_name = "tofusible"
+  space_id        = var.resource_space_id
+
+  auto_deploy = true
+
+  labels            = ["tofusible", "additional", "infracost"]
+  project_root      = "stacks/tofu/additional"
+  repository_branch = "main"
 }
