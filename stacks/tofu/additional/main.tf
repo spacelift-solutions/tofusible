@@ -4,6 +4,6 @@ variable "tofusible_inventory" {
 
 resource "null_resource" "additional" {
   triggers = {
-    tofusible_inventory = var.tofusible_inventory
+    tofusible_inventory = jsonencode(var.tofusible_inventory)
   }
 }
