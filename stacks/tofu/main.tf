@@ -49,6 +49,7 @@ resource "aws_instance" "tofu_production" {
   vpc_security_group_ids = [var.vpc_security_group_id]
   tags = {
     Name = "tofu production"
+    demo = "my amazing demo"
   }
 }
 
