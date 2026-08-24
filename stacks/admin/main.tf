@@ -114,7 +114,7 @@ module "stack_opentofu" {
     tofusible_ssh_key = spacelift_context.ssh_keys.id
   }
 
-  labels            = ["tofusible", "opentofu", "infracost"]
+  labels            = ["tofusible", "opentofu", "infracost", "jira"]
   project_root      = "stacks/tofu"
   repository_branch = "main"
 }
